@@ -1,10 +1,12 @@
-import { Container } from '@mui/system';
+import { Box } from '@mui/system';
 import Navbar from '../Navbar/Navbar';
+import Table from '../Table/Table';
 
 export default function MainLayout() {
   return (
-    <Container>
+    <Box display='flex' flexDirection='row' justifyContent='flex-start'>
       <Navbar />
-    </Container>
+      <Table />
+    </Box>
   );
 }

@@ -4,7 +4,7 @@ import NavbarItems from './NavbarItems/NavbarItems';
 
 export default function Navbar() {
   return (
-    <Box>
+    <Box width={240}>
       <NavbarLabel />
       <NavbarItems />
     </Box>

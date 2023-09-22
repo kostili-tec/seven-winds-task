@@ -1,6 +1,6 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Container } from '@mui/system';
+import { Box } from '@mui/system';
 import Stack from '@mui/material/Stack';
 import AppsIcon from '@mui/icons-material/Apps';
 import ReplyIcon from '@mui/icons-material/Reply';
@@ -14,7 +14,7 @@ export default function Header() {
   };
 
   return (
-    <Container>
+    <Box paddingX='20px'>
       <Stack direction='row' alignItems='center' gap='20px'>
         <AppsIcon fontSize='medium' color='secondary' />
         <ReplyIcon fontSize='medium' color='secondary' />
@@ -23,6 +23,6 @@ export default function Header() {
           <Tab label='Управление' />
         </Tabs>
       </Stack>
-    </Container>
+    </Box>
   );
 }
