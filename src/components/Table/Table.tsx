@@ -1,10 +1,13 @@
-import Container from '@mui/system/Container';
+import Box from '@mui/material/Box';
+
 import TableTab from './TableTab/TableTab';
+import TableHeader from './TableHeader/TableHeader';
 
 export default function Table() {
   return (
-    <Container disableGutters>
+    <Box display='flex' flexDirection='column' width='100%'>
       <TableTab />
-    </Container>
+      <TableHeader />
+    </Box>
   );
 }
