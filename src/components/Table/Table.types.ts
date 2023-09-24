@@ -8,4 +8,17 @@ export interface TableData {
   child: TableData[] | null;
 }
 
+export interface TableDataNested extends TableData {
+  level?: number;
+  nested?: Nested;
+}
+
 export type ArrayTableData = TableData[];
+
+export enum Nested {
+  PARENTWITHCHILD = 'parentWithChild',
+  PARENTNOCHILD = 'parantNoChild',
+  CHILDPARENT = 'childParent',
+  FINALCHILD = 'finalChild',
+  NOTFINALCHILD = 'notFinalChild',
+}

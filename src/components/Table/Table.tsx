@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import Box from '@mui/material/Box';
 
 import TableTab from './TableTab/TableTab';
 import TableHeader from './TableHeader/TableHeader';
 import TableTree from './TableTree/TableTree';
 
-import { ArrayTableData } from './Table.types';
+import { TableDataNested } from './Table.types';
+import { addLevelToData } from '../../utils/addLevelToData';
 
 export default function Table() {
-  const data: ArrayTableData = [
+  const data: TableDataNested[] = [
     {
       rowName: 'Элемент 1',
       equipmentCosts: 100,
@@ -43,6 +43,15 @@ export default function Table() {
               id: 4,
               child: [],
             },
+            {
+              rowName: 'Вложенный элемент 2',
+              equipmentCosts: 10,
+              overheads: 5,
+              estimatedProfit: 3,
+              salary: 7,
+              id: 132432,
+              child: [],
+            },
           ],
         },
       ],
@@ -57,13 +66,12 @@ export default function Table() {
       child: [],
     },
   ];
-  // eslint-disable-next-line
-  const [tableData, setTableData] = useState(data);
+  const newData = addLevelToData(data);
   return (
     <Box display='flex' flexDirection='column' width='100%'>
       <TableTab />
       <TableHeader />
-      <TableTree data={tableData} />
+      <TableTree data={newData} />
     </Box>
   );
 }

@@ -6,9 +6,13 @@ const FieldIconContainer = styled('div')({
   height: '24px',
 });
 
-export default function FieldIcon() {
+interface FieldIconProps {
+  className: string;
+}
+
+export default function FieldIcon({ className }: FieldIconProps) {
   return (
-    <FieldIconContainer>
+    <FieldIconContainer className={className}>
       <SvgIcon>
         <svg
           xmlns='http://www.w3.org/2000/svg'

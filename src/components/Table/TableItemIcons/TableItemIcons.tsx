@@ -8,7 +8,7 @@ const IconContainer = styled('div')({
   maxWidth: 55,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-around',
+  justifyContent: 'flex-start',
   '&:hover': {
     backgroundColor: '#414144',
   },
@@ -22,10 +22,14 @@ const StyledDeleteIcon = styled(DeleteIcon)({
   display: 'none',
 });
 
-export default function TableItemIcons() {
+interface TableItemIconsProps {
+  className: string;
+}
+
+export default function TableItemIcons({ className }: TableItemIconsProps) {
   return (
     <IconContainer>
-      <FieldIcon />
+      <FieldIcon className={className} />
       <StyledDeleteIcon className='delete-icon' />
     </IconContainer>
   );
