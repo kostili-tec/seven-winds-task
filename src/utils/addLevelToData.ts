@@ -1,8 +1,8 @@
-import { TableDataNested, Nested } from '../components/Table/Table.types';
+import { ModifiedTableData, Nested } from '../app/types/types';
 
 /* eslint-disable */
 
-export function addLevelToData(data: TableDataNested[], level = 0) {
+export function addLevelToData(data: ModifiedTableData[], level = 0) {
   return data.map((item, index, array) => {
     const newItem = { ...item, level };
     if (item.child?.length === 0 && level === 0) {

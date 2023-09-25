@@ -1,15 +1,10 @@
+import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { Nested, TableData } from '../Table.types';
 import TableItemIcons from '../TableItemIcons/TableItemIcons';
+import { ModifiedTableData, Nested } from '../../../app/types/types';
 import classes from './TableItem.module.scss';
-import { useState, useEffect } from 'react';
-
-interface TableItemProps extends TableData {
-  level: number;
-  nested?: Nested;
-}
 
 export default function TableItem({
   equipmentCosts,
@@ -19,9 +14,9 @@ export default function TableItem({
   salary,
   level,
   nested,
-}: TableItemProps) {
+}: ModifiedTableData) {
   const defaultPadding = 13;
-  const currentPadding = level * defaultPadding;
+  const currentPadding = level ? defaultPadding * level : defaultPadding;
   const [currentClasses, setCurrentClasses] = useState<Array<string>>([]);
   const setState = (className: string) => setCurrentClasses((state) => [...state, className]);
   useEffect(() => {

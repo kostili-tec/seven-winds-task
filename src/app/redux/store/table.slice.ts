@@ -1,19 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ApiRequest } from '../api/api.types';
-import { Nested } from '../../../components/Table/Table.types';
 
-interface ModifiedGetResponse extends ApiRequest {
-  level?: number;
-  nested?: Nested;
-}
+import { ModifiedTableData } from '../../types/types';
 
-const initialState: ModifiedGetResponse[] = [];
+const initialState: ModifiedTableData[] = [];
 
 const tableSlice = createSlice({
   name: 'tableData',
   initialState,
   reducers: {
-    saveData: (state, action: PayloadAction<ModifiedGetResponse[]>) => {
+    saveData: (state, action: PayloadAction<ModifiedTableData[]>) => {
       return action.payload;
     },
   },

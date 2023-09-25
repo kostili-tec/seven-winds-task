@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ApiGetResponse, ApiRequest, ApiResponse } from './api.types';
+
+import { ApiGetResponse, ApiRequest, ApiResponse } from '../../types/types';
 
 interface UpdateDataRequest {
   itemID: number;

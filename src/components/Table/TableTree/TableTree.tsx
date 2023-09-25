@@ -1,8 +1,8 @@
-import { ArrayTableData } from '../Table.types';
 import TableItem from '../TableItem/TableItem';
+import { ModifiedTableData } from '../../../app/types/types';
 
 interface TalbeItemsProps {
-  data: ArrayTableData;
+  data: ModifiedTableData[];
   level?: number;
 }
 

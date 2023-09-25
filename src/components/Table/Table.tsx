@@ -1,15 +1,15 @@
-import Box from '@mui/material/Box';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import Box from '@mui/material/Box';
 
 import TableTab from './TableTab/TableTab';
 import TableHeader from './TableHeader/TableHeader';
 import TableTree from './TableTree/TableTree';
 
-import { TableDataNested } from './Table.types';
 import { addLevelToData } from '../../utils/addLevelToData';
 import { useGetDataQuery } from '../../app/redux/api/api';
 import { saveData } from '../../app/redux/store/table.slice';
-import { useEffect } from 'react';
+import { ModifiedTableData } from '../../app/types/types';
 
 export default function Table() {
   const dispatch = useDispatch();
@@ -18,10 +18,12 @@ export default function Table() {
     console.log(data);
     if (data) {
       const modifiedData = addLevelToData(data);
+      // eslint-disable-next-line
       dispatch(saveData(modifiedData));
     }
   }, [dispatch, data]);
-  const data1: TableDataNested[] = [
+  // const tableData = useAppSelector((state) => state.table);
+  const data1: ModifiedTableData[] = [
     {
       rowName: 'Элемент 1',
       equipmentCosts: 100,
