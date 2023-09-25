@@ -6,9 +6,12 @@ import TableTree from './TableTree/TableTree';
 
 import { TableDataNested } from './Table.types';
 import { addLevelToData } from '../../utils/addLevelToData';
+import { useGetDataQuery } from '../../app/redux/api/api';
 
 export default function Table() {
-  const data: TableDataNested[] = [
+  const { data } = useGetDataQuery(null);
+  console.log(data);
+  const data1: TableDataNested[] = [
     {
       rowName: 'Элемент 1',
       equipmentCosts: 100,
@@ -66,7 +69,7 @@ export default function Table() {
       child: [],
     },
   ];
-  const newData = addLevelToData(data);
+  const newData = addLevelToData(data1);
   return (
     <Box display='flex' flexDirection='column' width='100%'>
       <TableTab />
