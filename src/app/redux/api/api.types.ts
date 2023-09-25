@@ -35,4 +35,5 @@ export interface ApiResponse {
 
 export interface ApiGetResponse extends ApiRequest { 
   child: [] | ApiGetResponse[]
+  id: number
 }

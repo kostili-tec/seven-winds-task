@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { useDispatch } from 'react-redux';
 
 import TableTab from './TableTab/TableTab';
 import TableHeader from './TableHeader/TableHeader';
@@ -7,10 +8,19 @@ import TableTree from './TableTree/TableTree';
 import { TableDataNested } from './Table.types';
 import { addLevelToData } from '../../utils/addLevelToData';
 import { useGetDataQuery } from '../../app/redux/api/api';
+import { saveData } from '../../app/redux/store/table.slice';
+import { useEffect } from 'react';
 
 export default function Table() {
+  const dispatch = useDispatch();
   const { data } = useGetDataQuery(null);
-  console.log(data);
+  useEffect(() => {
+    console.log(data);
+    if (data) {
+      const modifiedData = addLevelToData(data);
+      dispatch(saveData(modifiedData));
+    }
+  }, [dispatch, data]);
   const data1: TableDataNested[] = [
     {
       rowName: 'Элемент 1',

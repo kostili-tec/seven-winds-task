@@ -6,6 +6,11 @@ export interface TableData {
   salary: number;
   id: number;
   child: TableData[] | null;
+  machineOperatorSalary?: number;
+  mainCosts?: number;
+  materials?: number;
+  mimExploitation?: number;
+  supportCosts?: number;
 }
 
 export interface TableDataNested extends TableData {
