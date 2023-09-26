@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 
 import TableItemIcons from '../TableItemIcons/TableItemIcons';
+import TableItemCell from './TableItemCell/TableItemCell';
 import { ModifiedTableData, Nested } from '../../../app/types/types';
 import classes from './TableItem.module.scss';
 
@@ -17,6 +17,7 @@ export default function TableItem({
 }: ModifiedTableData) {
   const defaultPadding = 13;
   const currentPadding = level ? defaultPadding * level : defaultPadding;
+  const [isEdit, setIsEdit] = useState(false);
   const [currentClasses, setCurrentClasses] = useState<Array<string>>([]);
   const setState = (className: string) => setCurrentClasses((state) => [...state, className]);
   useEffect(() => {
@@ -35,6 +36,14 @@ export default function TableItem({
       setState(classes.notFinalChild);
     }
   }, [nested]);
+
+  const handleDoubleClick = (event: React.MouseEvent) => {
+    if (event.detail === 2) {
+      isEdit === false ? setIsEdit(true) : setIsEdit(false);
+      console.log('double');
+      console.log(isEdit);
+    }
+  };
   return (
     <Grid
       container
@@ -45,34 +54,25 @@ export default function TableItem({
       paddingLeft='4px'
       borderTop='1px solid'
       marginX='10px'
+      onClick={handleDoubleClick}
     >
       <Grid item xs={1} paddingLeft={`${currentPadding}px`}>
         <TableItemIcons className={currentClasses.join(' ')} />
       </Grid>
       <Grid item xs={5}>
-        <Typography color='primary' variant='body2'>
-          {rowName}
-        </Typography>
+        <TableItemCell text={rowName} isEdit={isEdit} />
       </Grid>
       <Grid item xs={1.5}>
-        <Typography color='primary' variant='body2'>
-          {salary}
-        </Typography>
+        <TableItemCell text={salary} isEdit={isEdit} />
       </Grid>
       <Grid item xs={1.5}>
-        <Typography color='primary' variant='body2'>
-          {equipmentCosts}
-        </Typography>
+        <TableItemCell text={equipmentCosts} isEdit={isEdit} />
       </Grid>
       <Grid item xs={1.5}>
-        <Typography color='primary' variant='body2'>
-          {overheads}
-        </Typography>
+        <TableItemCell text={overheads} isEdit={isEdit} />
       </Grid>
       <Grid item xs={1.5}>
-        <Typography color='primary' variant='body2'>
-          {estimatedProfit}
-        </Typography>
+        <TableItemCell text={estimatedProfit} isEdit={isEdit} />
       </Grid>
     </Grid>
   );
