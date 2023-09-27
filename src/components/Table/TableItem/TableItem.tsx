@@ -1,52 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 
 import TableItemIcons from '../TableItemIcons/TableItemIcons';
 import TableItemCell from './TableItemCell/TableItemCell';
-import { ModifiedTableData, Nested } from '../../../app/types/types';
-import classes from './TableItem.module.scss';
+import { ModifiedTableData } from '../../../app/types/types';
 import { useTableData } from '../../../hooks/useTableData';
 
 export default function TableItem(props: ModifiedTableData) {
+  const [isEdit, setIsEdit] = useState(false);
   const { tableData, updateData, sendData } = useTableData({ ...props });
   const { equipmentCosts, overheads, estimatedProfit, rowName, salary, level, nested } = tableData;
   const defaultPadding = 13;
   const currentPadding = level ? defaultPadding * level : defaultPadding;
 
-  const [isEdit, setIsEdit] = useState(false);
-  const [currentClasses, setCurrentClasses] = useState<Array<string>>([]);
-  const setState = (className: string) => setCurrentClasses((state) => [...state, className]);
-  useEffect(() => {
-    if (nested === Nested.PARENTWITHCHILD) {
-      setState(classes.parentLine);
-    }
-    if (nested === Nested.CHILDPARENT) {
-      setState(classes.nestedParent);
-      setState(classes.leftLine);
-    }
-    if (nested === Nested.FINALCHILD) {
-      setState(classes.leftLine);
-    }
-    if (nested === Nested.NOTFINALCHILD) {
-      setState(classes.leftLine);
-      setState(classes.notFinalChild);
-    }
-  }, [nested]);
-
   const handleDoubleClick = (event: React.MouseEvent) => {
     if (event.detail === 2) {
       if (isEdit) {
         setIsEdit(false);
-        // sendData();
       } else setIsEdit(true);
-      console.log('double');
-      console.log(isEdit);
     }
   };
 
   const handleContainerKeyPress = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       await sendData();
+      setIsEdit(false);
+    }
+    if (event.key === 'Escape') {
       setIsEdit(false);
     }
   };
@@ -64,7 +44,7 @@ export default function TableItem(props: ModifiedTableData) {
       onClick={handleDoubleClick}
     >
       <Grid item xs={1} paddingLeft={`${currentPadding}px`}>
-        <TableItemIcons className={currentClasses.join(' ')} />
+        <TableItemIcons nested={nested} isEdit={isEdit} />
       </Grid>
       <Grid item xs={5}>
         <TableItemCell

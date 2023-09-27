@@ -1,3 +1,22 @@
+.iconsContainer {
+  &:hover {
+    background-color: #414144;
+  }
+  &:hover .deleteIcon {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.fieldIcon {
+  cursor: pointer;
+}
+
+.deleteIcon {
+  display: none;
+}
+
+
 .parentLine {
   position: relative;
   &::before {

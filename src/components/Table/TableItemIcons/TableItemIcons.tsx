@@ -1,6 +1,10 @@
+import { useState, useEffect } from 'react';
 import styled from '@mui/system/styled';
+
 import DeleteIcon from '../../Icons/DeleteIcon';
 import FieldIcon from '../../Icons/FieldIcon';
+import classes from './TableItemIcons.module.scss';
+import { Nested } from '../../../app/types/types';
 
 const IconContainer = styled('div')({
   borderRadius: 6,
@@ -9,13 +13,6 @@ const IconContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  '&:hover': {
-    backgroundColor: '#414144',
-  },
-  '&:hover .delete-icon': {
-    display: 'block',
-    cursor: 'pointer',
-  },
 });
 
 const StyledDeleteIcon = styled(DeleteIcon)({
@@ -23,14 +20,35 @@ const StyledDeleteIcon = styled(DeleteIcon)({
 });
 
 interface TableItemIconsProps {
-  className: string;
+  isEdit: boolean;
+  nested: Nested | undefined;
 }
 
-export default function TableItemIcons({ className }: TableItemIconsProps) {
+export default function TableItemIcons({ isEdit, nested }: TableItemIconsProps) {
+  const containerClasses = isEdit ? '' : `${classes.iconsContainer}`;
+  const fieldIconClasses = isEdit ? '' : `${classes.fieldIcon}`;
+  const [currentClasses, setCurrentClasses] = useState<Array<string>>([]);
+  const setState = (className: string) => setCurrentClasses((state) => [...state, className]);
+  useEffect(() => {
+    if (nested === Nested.PARENTWITHCHILD) {
+      setState(classes.parentLine);
+    }
+    if (nested === Nested.CHILDPARENT) {
+      setState(classes.nestedParent);
+      setState(classes.leftLine);
+    }
+    if (nested === Nested.FINALCHILD) {
+      setState(classes.leftLine);
+    }
+    if (nested === Nested.NOTFINALCHILD) {
+      setState(classes.leftLine);
+      setState(classes.notFinalChild);
+    }
+  }, [nested]);
   return (
-    <IconContainer>
-      <FieldIcon className={className} />
-      <StyledDeleteIcon className='delete-icon' />
+    <IconContainer className={containerClasses}>
+      <FieldIcon className={`${currentClasses.join(' ')} ${fieldIconClasses}`} />
+      <StyledDeleteIcon className={classes.deleteIcon} />
     </IconContainer>
   );
 }

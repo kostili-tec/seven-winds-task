@@ -2,7 +2,6 @@ import SvgIcon from '@mui/material/SvgIcon';
 import styled from '@mui/system/styled';
 
 const FieldIconContainer = styled('div')({
-  cursor: 'pointer',
   height: '24px',
 });
 
