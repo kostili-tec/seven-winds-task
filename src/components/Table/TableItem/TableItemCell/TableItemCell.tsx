@@ -28,7 +28,7 @@ interface TableItemCellProps {
   isEdit: boolean;
   name: string;
   type: 'text' | 'number';
-  updateData: (fieldName: string, newValue: number | string) => void;
+  updateData?: (fieldName: string, newValue: number | string) => void;
   onPressEnter: (event: React.KeyboardEvent) => Promise<void>;
 }
 
@@ -42,9 +42,11 @@ export default function TableItemCell({
 }: TableItemCellProps) {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    if (type === 'number') {
-      updateData(name, Number(newValue));
-    } else updateData(name, newValue);
+    if (updateData) {
+      if (type === 'number') {
+        updateData(name, Number(newValue));
+      } else updateData(name, newValue);
+    }
   };
   return (
     <>

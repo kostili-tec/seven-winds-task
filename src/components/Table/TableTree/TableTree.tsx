@@ -1,5 +1,5 @@
-import TableItem from '../TableItem/TableItem';
 import { ModifiedTableData } from '../../../app/types/types';
+import TableItemMain from '../TableItem/TableItemMain/TableItemMain';
 
 interface TalbeItemsProps {
   data: ModifiedTableData[];
@@ -11,7 +11,7 @@ export default function TableTree({ data, level = 1 }: TalbeItemsProps) {
     <div>
       {data.map((item) => (
         <div key={item.id}>
-          <TableItem {...item} level={level} />
+          <TableItemMain {...item} level={level} />
           {item.child && <TableTree data={item.child} level={level + 1} />}
         </div>
       ))}

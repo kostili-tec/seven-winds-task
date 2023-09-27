@@ -1,36 +1,28 @@
-import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 
-import TableItemIcons from '../TableItemIcons/TableItemIcons';
-import TableItemCell from './TableItemCell/TableItemCell';
-import { ModifiedTableData } from '../../../app/types/types';
-import { useTableData } from '../../../hooks/useTableData';
+import TableItemIcons from '../../TableItemIcons/TableItemIcons';
+import TableItemCell from '../TableItemCell/TableItemCell';
+import { ModifiedTableData } from '../../../../app/types/types';
 
-export default function TableItem(props: ModifiedTableData) {
-  const [isEdit, setIsEdit] = useState(false);
-  const { tableData, updateData, sendData } = useTableData({ ...props });
+interface TableItemProps {
+  tableData: ModifiedTableData;
+  isEditState: boolean;
+  // isShowEditRow: boolean;
+  handleDoubleClick: (event: React.MouseEvent) => void;
+  handleContainerKeyPress: (event: React.KeyboardEvent) => Promise<void>;
+  updateData?: (fieldName: string, newValue: number | string) => void;
+}
+
+export default function TableItemRow({
+  tableData,
+  isEditState,
+  handleDoubleClick,
+  handleContainerKeyPress,
+  updateData,
+}: TableItemProps) {
   const { equipmentCosts, overheads, estimatedProfit, rowName, salary, level, nested } = tableData;
   const defaultPadding = 13;
   const currentPadding = level ? defaultPadding * level : defaultPadding;
-
-  const handleDoubleClick = (event: React.MouseEvent) => {
-    if (event.detail === 2) {
-      if (isEdit) {
-        setIsEdit(false);
-      } else setIsEdit(true);
-    }
-  };
-
-  const handleContainerKeyPress = async (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      await sendData();
-      setIsEdit(false);
-    }
-    if (event.key === 'Escape') {
-      setIsEdit(false);
-    }
-  };
-
   return (
     <Grid
       container
@@ -44,12 +36,12 @@ export default function TableItem(props: ModifiedTableData) {
       onClick={handleDoubleClick}
     >
       <Grid item xs={1} paddingLeft={`${currentPadding}px`}>
-        <TableItemIcons nested={nested} isEdit={isEdit} />
+        <TableItemIcons nested={nested} isEdit={isEditState} />
       </Grid>
       <Grid item xs={5}>
         <TableItemCell
           text={rowName}
-          isEdit={isEdit}
+          isEdit={isEditState}
           updateData={updateData}
           name='rowName'
           type='text'
@@ -59,7 +51,7 @@ export default function TableItem(props: ModifiedTableData) {
       <Grid item xs={1.5}>
         <TableItemCell
           text={salary}
-          isEdit={isEdit}
+          isEdit={isEditState}
           updateData={updateData}
           name='salary'
           type='number'
@@ -69,7 +61,7 @@ export default function TableItem(props: ModifiedTableData) {
       <Grid item xs={1.5}>
         <TableItemCell
           text={equipmentCosts}
-          isEdit={isEdit}
+          isEdit={isEditState}
           updateData={updateData}
           name='equipmentCosts'
           type='number'
@@ -79,7 +71,7 @@ export default function TableItem(props: ModifiedTableData) {
       <Grid item xs={1.5}>
         <TableItemCell
           text={overheads}
-          isEdit={isEdit}
+          isEdit={isEditState}
           updateData={updateData}
           name='overheads'
           type='number'
@@ -89,7 +81,7 @@ export default function TableItem(props: ModifiedTableData) {
       <Grid item xs={1.5}>
         <TableItemCell
           text={estimatedProfit}
-          isEdit={isEdit}
+          isEdit={isEditState}
           updateData={updateData}
           name='estimatedProfit'
           type='number'
