@@ -7,11 +7,12 @@ const FieldIconContainer = styled('div')({
 
 interface FieldIconProps {
   className: string;
+  handleFieldIconClick?: () => void;
 }
 
-export default function FieldIcon({ className }: FieldIconProps) {
+export default function FieldIcon({ className, handleFieldIconClick }: FieldIconProps) {
   return (
-    <FieldIconContainer className={className}>
+    <FieldIconContainer className={className} onClick={handleFieldIconClick}>
       <SvgIcon>
         <svg
           xmlns='http://www.w3.org/2000/svg'

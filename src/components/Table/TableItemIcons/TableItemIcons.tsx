@@ -22,9 +22,14 @@ const StyledDeleteIcon = styled(DeleteIcon)({
 interface TableItemIconsProps {
   isEdit: boolean;
   nested: Nested | undefined;
+  handleFieldIconClick?: () => void;
 }
 
-export default function TableItemIcons({ isEdit, nested }: TableItemIconsProps) {
+export default function TableItemIcons({
+  isEdit,
+  nested,
+  handleFieldIconClick,
+}: TableItemIconsProps) {
   const containerClasses = isEdit ? '' : `${classes.iconsContainer}`;
   const fieldIconClasses = isEdit ? '' : `${classes.fieldIcon}`;
   const [currentClasses, setCurrentClasses] = useState<Array<string>>([]);
@@ -47,7 +52,10 @@ export default function TableItemIcons({ isEdit, nested }: TableItemIconsProps) 
   }, [nested]);
   return (
     <IconContainer className={containerClasses}>
-      <FieldIcon className={`${currentClasses.join(' ')} ${fieldIconClasses}`} />
+      <FieldIcon
+        handleFieldIconClick={handleFieldIconClick}
+        className={`${currentClasses.join(' ')} ${fieldIconClasses}`}
+      />
       <StyledDeleteIcon className={classes.deleteIcon} />
     </IconContainer>
   );

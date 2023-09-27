@@ -4,12 +4,13 @@ import TableItemIcons from '../../TableItemIcons/TableItemIcons';
 import TableItemCell from '../TableItemCell/TableItemCell';
 import { ModifiedTableData } from '../../../../app/types/types';
 
-interface TableItemProps {
+interface TableItemRowProps {
   tableData: ModifiedTableData;
   isEditState: boolean;
   // isShowEditRow: boolean;
-  handleDoubleClick: (event: React.MouseEvent) => void;
   handleContainerKeyPress: (event: React.KeyboardEvent) => Promise<void>;
+  handleDoubleClick?: (event: React.MouseEvent) => void;
+  handleFieldIconClick?: () => void;
   updateData?: (fieldName: string, newValue: number | string) => void;
 }
 
@@ -19,7 +20,8 @@ export default function TableItemRow({
   handleDoubleClick,
   handleContainerKeyPress,
   updateData,
-}: TableItemProps) {
+  handleFieldIconClick,
+}: TableItemRowProps) {
   const { equipmentCosts, overheads, estimatedProfit, rowName, salary, level, nested } = tableData;
   const defaultPadding = 13;
   const currentPadding = level ? defaultPadding * level : defaultPadding;
@@ -36,7 +38,11 @@ export default function TableItemRow({
       onClick={handleDoubleClick}
     >
       <Grid item xs={1} paddingLeft={`${currentPadding}px`}>
-        <TableItemIcons nested={nested} isEdit={isEditState} />
+        <TableItemIcons
+          handleFieldIconClick={handleFieldIconClick}
+          nested={nested}
+          isEdit={isEditState}
+        />
       </Grid>
       <Grid item xs={5}>
         <TableItemCell
