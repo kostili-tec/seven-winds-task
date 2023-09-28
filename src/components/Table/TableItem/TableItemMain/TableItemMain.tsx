@@ -7,10 +7,17 @@ import TableItemRow from '../TableItemRow/TableItemRow';
 export default function TableItemMain(props: ModifiedTableData) {
   const [isEdit, setIsEdit] = useState(false);
   const [isShowCreateRow, setIsShowCreateRow] = useState(false);
-  const { tableData, newRowData, updateStateData, updateStateNewRowData, updateData, postData } =
-    useTableData({
-      ...props,
-    });
+  const {
+    tableData,
+    newRowData,
+    updateStateData,
+    updateStateNewRowData,
+    updateData,
+    postData,
+    deleteData,
+  } = useTableData({
+    ...props,
+  });
 
   const handleDoubleClick = (event: React.MouseEvent) => {
     if (event.detail === 2) {
@@ -29,6 +36,7 @@ export default function TableItemMain(props: ModifiedTableData) {
       setIsEdit(false);
     }
   };
+
   const handleKeyPressCreate = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       const parendId = tableData.id;
@@ -43,6 +51,11 @@ export default function TableItemMain(props: ModifiedTableData) {
   const handleShowCreateRow = () => {
     if (!isEdit) isShowCreateRow ? setIsShowCreateRow(false) : setIsShowCreateRow(true);
   };
+
+  const handleDeleteRow = async () => {
+    const { id } = tableData;
+    await deleteData(id);
+  };
   return (
     <>
       <TableItemRow
@@ -52,6 +65,8 @@ export default function TableItemMain(props: ModifiedTableData) {
         isEditState={isEdit}
         updateData={updateStateData}
         handleFieldIconClick={handleShowCreateRow}
+        // eslint-disable-next-line
+        handleDeleteIconClick={handleDeleteRow}
       />
       {isShowCreateRow && !isEdit && (
         <TableItemRow

@@ -7,10 +7,10 @@ import { ModifiedTableData } from '../../../../app/types/types';
 interface TableItemRowProps {
   tableData: ModifiedTableData;
   isEditState: boolean;
-  // isShowEditRow: boolean;
   handleContainerKeyPress: (event: React.KeyboardEvent) => Promise<void>;
   handleDoubleClick?: (event: React.MouseEvent) => void;
   handleFieldIconClick?: () => void;
+  handleDeleteIconClick?: () => Promise<void>;
   updateData?: (fieldName: string, newValue: number | string) => void;
 }
 
@@ -21,6 +21,7 @@ export default function TableItemRow({
   handleContainerKeyPress,
   updateData,
   handleFieldIconClick,
+  handleDeleteIconClick,
 }: TableItemRowProps) {
   const { equipmentCosts, overheads, estimatedProfit, rowName, salary, level, nested } = tableData;
   const defaultPadding = 13;
@@ -40,6 +41,7 @@ export default function TableItemRow({
       <Grid item xs={1} paddingLeft={`${currentPadding}px`}>
         <TableItemIcons
           handleFieldIconClick={handleFieldIconClick}
+          handleDeleteIconClick={handleDeleteIconClick}
           nested={nested}
           isEdit={isEditState}
         />

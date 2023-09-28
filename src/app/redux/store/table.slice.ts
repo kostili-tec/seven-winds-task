@@ -15,6 +15,10 @@ const tableSlice = createSlice({
       const { id, child } = action.payload;
       state.forEach((item) => addChildByIdRecursive(item, id, child));
     },
+    deleteItem: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      removeItemByIdRecursive([...state], id);
+    },
   },
 });
 
@@ -32,6 +36,21 @@ const addChildByIdRecursive = (
   });
 };
 
-export const { saveData, addChildById } = tableSlice.actions;
+const removeItemByIdRecursive = (
+  items: ModifiedTableData[],
+  itemIdToRemove: number
+): ModifiedTableData[] => {
+  items.forEach((item, index) => {
+    if (item.id === itemIdToRemove) {
+      items.splice(index, 1);
+    }
+    if (item.child && item.child.length > 0) {
+      removeItemByIdRecursive(item.child, itemIdToRemove);
+    }
+  });
+  return items;
+};
+
+export const { saveData, addChildById, deleteItem } = tableSlice.actions;
 
 export default tableSlice.reducer;

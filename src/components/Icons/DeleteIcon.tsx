@@ -2,9 +2,10 @@ import SvgIcon from '@mui/material/SvgIcon';
 
 interface DeleteIconProps {
   className: string;
+  handleDeleteIconClick?: () => void;
 }
 
-export default function DeleteIcon({ className }: DeleteIconProps) {
+export default function DeleteIcon({ className, handleDeleteIconClick }: DeleteIconProps) {
   return (
     <SvgIcon fontSize='small'>
       <svg
@@ -14,6 +15,7 @@ export default function DeleteIcon({ className }: DeleteIconProps) {
         viewBox='0 0 16 16'
         fill='none'
         className={className}
+        onClick={handleDeleteIconClick}
       >
         <g clipPath='url(#clip0_3704_303)'>
           <path

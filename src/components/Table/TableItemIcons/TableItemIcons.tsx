@@ -23,12 +23,14 @@ interface TableItemIconsProps {
   isEdit: boolean;
   nested: Nested | undefined;
   handleFieldIconClick?: () => void;
+  handleDeleteIconClick?: () => Promise<void>;
 }
 
 export default function TableItemIcons({
   isEdit,
   nested,
   handleFieldIconClick,
+  handleDeleteIconClick,
 }: TableItemIconsProps) {
   const containerClasses = isEdit ? '' : `${classes.iconsContainer}`;
   const fieldIconClasses = isEdit ? '' : `${classes.fieldIcon}`;
@@ -56,7 +58,10 @@ export default function TableItemIcons({
         handleFieldIconClick={handleFieldIconClick}
         className={`${currentClasses.join(' ')} ${fieldIconClasses}`}
       />
-      <StyledDeleteIcon className={classes.deleteIcon} />
+      <StyledDeleteIcon
+        handleDeleteIconClick={handleDeleteIconClick}
+        className={classes.deleteIcon}
+      />
     </IconContainer>
   );
 }

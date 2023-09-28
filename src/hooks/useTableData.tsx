@@ -1,9 +1,13 @@
 import { useState } from 'react';
 
 import { ModifiedTableData, ApiCreateRequest } from '../app/types/types';
-import { useUpdateDataMutation, useCreateDataMutation } from '../app/redux/api/api';
+import {
+  useUpdateDataMutation,
+  useCreateDataMutation,
+  useDeleteItemMutation,
+} from '../app/redux/api/api';
 import { useAppDispatch } from '../app/redux/store/store';
-import { addChildById } from '../app/redux/store/table.slice';
+import { addChildById, deleteItem } from '../app/redux/store/table.slice';
 import { createEmptyData } from '../components/Table/TableItem/TableItemMain/TableItemMain.service';
 
 export function useTableData(initialData: ModifiedTableData) {
@@ -11,6 +15,7 @@ export function useTableData(initialData: ModifiedTableData) {
   const [newRowData, setNewRowData] = useState<ModifiedTableData>(createEmptyData());
   const [updateDataMutation] = useUpdateDataMutation();
   const [createDataMutation, { isError }] = useCreateDataMutation();
+  const [deleteDataMutation] = useDeleteItemMutation();
   const dispath = useAppDispatch();
 
   const updateStateData = (fieldName: string, newValue: number | string | ModifiedTableData) => {
@@ -47,6 +52,11 @@ export function useTableData(initialData: ModifiedTableData) {
     }
   };
 
+  const deleteData = async (id: number) => {
+    await deleteDataMutation(id);
+    dispath(deleteItem(id));
+  };
+
   return {
     tableData,
     newRowData,
@@ -54,5 +64,6 @@ export function useTableData(initialData: ModifiedTableData) {
     updateData,
     updateStateNewRowData,
     postData,
+    deleteData,
   };
 }
