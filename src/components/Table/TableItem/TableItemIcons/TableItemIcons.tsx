@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import styled from '@mui/system/styled';
 
-import DeleteIcon from '../../Icons/DeleteIcon';
-import FieldIcon from '../../Icons/FieldIcon';
+import { FieldIcon, DeleteIcon } from '@/components/Icons';
+import { Nested } from '@/app/types/types';
 import classes from './TableItemIcons.module.scss';
-import { Nested } from '../../../app/types/types';
 
 const IconContainer = styled('div')({
   borderRadius: 6,

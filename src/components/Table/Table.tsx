@@ -2,14 +2,12 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 
-import TableTab from './TableTab/TableTab';
-import TableHeader from './TableHeader/TableHeader';
-import TableTree from './TableTree/TableTree';
+import { TableHeader, TableTab, TableTree } from '.';
 
-import { addLevelToData } from '../../utils/addLevelToData';
-import { useGetDataQuery } from '../../app/redux/api/api';
-import { useAppSelector } from '../../app/redux/store/store';
-import { saveData } from '../../app/redux/store/table.slice';
+import { useGetDataQuery } from '@/app/redux/api/api';
+import { useAppSelector } from '@/app/redux/store/store';
+import { saveData } from '@/app/redux/store/table.slice';
+import { addLevelToData } from '@/utils/addLevelToData';
 
 export default function Table() {
   const dispatch = useDispatch();

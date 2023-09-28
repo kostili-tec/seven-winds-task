@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useTableData } from '@/hooks/useTableData';
 import { ModifiedTableData } from '@/app/types/types';
-import TableItemRow from '../TableItemRow/TableItemRow';
+import { TableItemRow } from '..';
 
 export default function TableItemMain(props: ModifiedTableData) {
   const [isEdit, setIsEdit] = useState(false);

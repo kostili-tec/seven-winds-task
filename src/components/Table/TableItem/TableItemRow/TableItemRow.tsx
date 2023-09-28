@@ -1,8 +1,7 @@
 import Grid from '@mui/material/Grid';
 
-import TableItemIcons from '../../TableItemIcons/TableItemIcons';
-import TableItemCell from '../TableItemCell/TableItemCell';
-import { ModifiedTableData } from '../../../../app/types/types';
+import { TableItemIcons, TableItemCell } from '..';
+import { ModifiedTableData } from '@/app/types/types';
 
 interface TableItemRowProps {
   tableData: ModifiedTableData;

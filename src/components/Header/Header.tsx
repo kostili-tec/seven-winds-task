@@ -1,15 +1,14 @@
+import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Box } from '@mui/system';
+import Box from '@mui/system/Box';
 import Stack from '@mui/material/Stack';
 import AppsIcon from '@mui/icons-material/Apps';
 import ReplyIcon from '@mui/icons-material/Reply';
-import { useState } from 'react';
 
 export default function Header() {
   const [value, setValue] = useState(0);
 
-  // eslint-disable-next-line
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

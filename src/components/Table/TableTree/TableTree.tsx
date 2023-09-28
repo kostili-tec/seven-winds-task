@@ -1,5 +1,5 @@
-import { ModifiedTableData } from '../../../app/types/types';
-import TableItemMain from '../TableItem/TableItemMain/TableItemMain';
+import { ModifiedTableData } from '@/app/types/types';
+import { TableItemMain } from '../TableItem';
 
 interface TalbeItemsProps {
   data: ModifiedTableData[];
