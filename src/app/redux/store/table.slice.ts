@@ -8,7 +8,7 @@ const tableSlice = createSlice({
   name: 'tableData',
   initialState,
   reducers: {
-    saveData: (state, action: PayloadAction<ModifiedTableData[]>) => {
+    saveData: (_state, action: PayloadAction<ModifiedTableData[]>) => {
       return action.payload;
     },
     addChildById: (state, action: PayloadAction<{ id: number; child: ModifiedTableData }>) => {
