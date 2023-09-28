@@ -14,14 +14,11 @@ export function useTableData(initialData: ModifiedTableData) {
   const dispath = useAppDispatch();
 
   const updateStateData = (fieldName: string, newValue: number | string | ModifiedTableData) => {
-    const updatedTableData = { ...tableData, [fieldName]: newValue };
-    setTableData(updatedTableData);
-    console.log(tableData);
+    setTableData((state) => ({ ...state, [fieldName]: newValue }));
   };
 
   const updateStateNewRowData = (fieldName: string, newValue: number | string) => {
-    const data = { ...newRowData, [fieldName]: newValue };
-    setNewRowData(data);
+    setNewRowData((state) => ({ ...state, [fieldName]: newValue }));
   };
 
   const updateStateDataChild = (newData: ModifiedTableData) => {
