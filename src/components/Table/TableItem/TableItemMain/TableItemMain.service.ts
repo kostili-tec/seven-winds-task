@@ -14,5 +14,6 @@ export function createEmptyData(): ModifiedTableData {
     child: [],
     id: 0,
     total: 0,
+    materials: 0,
   };
 }

@@ -43,7 +43,7 @@ export interface ModifiedTableData extends ApiRequest {
   total: number;
   level?: number;
   nested?: Nested;
-  child: ModifiedTableData[] | null;
+  child: ModifiedTableData[];
   id: number;
 }
 

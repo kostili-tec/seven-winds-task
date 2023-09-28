@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-import { useTableData } from '../../../../hooks/useTableData';
-import { ModifiedTableData } from '../../../../app/types/types';
+import { useTableData } from '@/hooks/useTableData';
+import { ModifiedTableData } from '@/app/types/types';
 import TableItemRow from '../TableItemRow/TableItemRow';
-import { createEmptyData } from './TableItemMain.service';
 
 export default function TableItemMain(props: ModifiedTableData) {
   const [isEdit, setIsEdit] = useState(false);
   const [isShowCreateRow, setIsShowCreateRow] = useState(false);
-  const { tableData, updateData, sendData } = useTableData({ ...props });
-
-  const emptyData = createEmptyData();
+  const { tableData, newRowData, updateStateData, updateStateNewRowData, updateData, postData } =
+    useTableData({
+      ...props,
+    });
 
   const handleDoubleClick = (event: React.MouseEvent) => {
     if (event.detail === 2) {
@@ -22,7 +22,7 @@ export default function TableItemMain(props: ModifiedTableData) {
 
   const handleContainerKeyPress = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      await sendData();
+      await updateData();
       setIsEdit(false);
     }
     if (event.key === 'Escape') {
@@ -31,7 +31,8 @@ export default function TableItemMain(props: ModifiedTableData) {
   };
   const handleKeyPressCreate = async (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      await sendData();
+      const parendId = tableData.id;
+      await postData(parendId);
       setIsShowCreateRow(false);
     }
     if (event.key === 'Escape') {
@@ -49,14 +50,15 @@ export default function TableItemMain(props: ModifiedTableData) {
         handleDoubleClick={handleDoubleClick}
         tableData={tableData}
         isEditState={isEdit}
-        updateData={updateData}
+        updateData={updateStateData}
         handleFieldIconClick={handleShowCreateRow}
       />
       {isShowCreateRow && !isEdit && (
         <TableItemRow
           handleContainerKeyPress={handleKeyPressCreate}
           isEditState={true}
-          tableData={emptyData}
+          tableData={newRowData}
+          updateData={updateStateNewRowData}
         />
       )}
     </>
