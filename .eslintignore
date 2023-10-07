@@ -1,0 +1,10 @@
+.idea
+.storybook
+.config
+node_modules/*
+config/*
+public/*
+static/*
+scripts/*
+src/vite-env.d.ts
+src/app/redux/api/*

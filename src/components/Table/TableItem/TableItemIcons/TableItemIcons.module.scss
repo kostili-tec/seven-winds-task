@@ -1,0 +1,93 @@
+.iconsContainer {
+  &:hover {
+    background-color: #414144;
+  }
+  &:hover .deleteIcon {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.fieldIcon {
+  cursor: pointer;
+}
+
+.deleteIcon {
+  display: none;
+}
+
+
+.parentLine {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    width: 2px;
+    height: 52px;
+    background-color: #C6C6C6;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+}
+
+.nestedParent {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    width: 2px;
+    height: 52px;
+    background-color: #C6C6C6;
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+}
+
+.leftLine {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 5px;
+    height: 2px;
+    background-color: #C6C6C6;
+    transform: translateX(-30%);
+    z-index: 0;
+  }
+}
+
+.finalChild {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 5px;
+    height: 2px;
+    background-color: #C6C6C6;
+    transform: translateX(-30%);
+    z-index: 0;
+  }
+}
+
+.notFinalChild {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 12px;
+    width: 2px;
+    height: 59px;
+    background-color: #C6C6C6;
+    transform: translateX(8%);
+    z-index: 0;
+  }
+}
